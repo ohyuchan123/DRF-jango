@@ -78,7 +78,7 @@ pip install djangorestframework markdown
 이를 위해서 장고는 `django.http` 모듈에서 `HttpRequest`와 `HttpResponse` API를 제공하는 것이다.
 
 ### Render
-추가로 Render에 대해서도 작성하면 좋을 것 같아 정리하엿습니다.
+추가로 Render에 대해서도 작성하면 좋을 것 같아 정리하였습니다.
 `Render`는 `HttpResponse` 객체를 반환하는 함수로, `template`을 `context`와 엮어서 `HttpReponse` 객체로 쉽게 반환해 주는 함수라고 한다.
 
 이 함수의 기본형은 
@@ -94,4 +94,23 @@ render(request(필수),template_name(필수),
 - template_name : 불러오고 싶은 템플릿 명을 적는다. 이전 함수에서 `loader.get_template()`함수 안에 들어간 인자를 적으면 된다.
 - context : View에서 사용하던 변수(Dict 자료형)를 html 템플리에서 전달하는 역할을 한다. `key`값이 템플릿에서 사용할 변수 이름, `value`값이 파이썬 변수가 된다.
 
+**HttpReponse는 아래와 같이 불러올 수 있다**
+
+```python
+from django.http import HttpReponse
+```
+
+## 정규표현식
+정규표현식이란 특정한 규칙을 가진 문자열의 집합을 표현하는 데 사용하는 형식 언어라고 합니다.
+
+
+## DRF Response 코드 분석
+```python
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+@api_view()
+def hello_world_drf(request):
+    return Response({"message":"Hello, world!"})
+```
 
