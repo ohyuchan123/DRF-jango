@@ -114,3 +114,30 @@ def hello_world_drf(request):
     return Response({"message":"Hello, world!"})
 ```
 
+## Serialization
+객체를 저장하거나 메모리, 데이터베이스 혹은 파일로 옮기려면 어떻게 해야 할까? 이럴 때 필요한 것이 직렬화이다.  
+
+직렬화란 객체를 바이트 스트림으로 바꾸는 것, 즉 객체에 저장된 데이터를 스트림에 쓰기 write를 위해 연속적인 serial 데이터로 변환하는 것이다.
+
+직렬화의 주된 목적은 객체를 상태 **그대로 저장**하고 필요할 때 다시 생성하여 사용하는 것이다.
+
+## django-serializer 자세히 알아보기
+
+### 🤔 왜?
+장고의 serializer는 잘만 활용하면, 효율적으로 valid 검사부터, 쿼리셋에서 불러오는 것까지 간단히 구현가능하다.
+
+**Serializer**
+> 직렬화를 하는 직렬변환기?
+> **Serialize(직렬화)**
+> **쿼리셋,모델 인스턴스 등의 complex type(복잡한 데이터)를** Json,XML등의 컨텐트 타입으로 쉽게 변환 가능한 python datatype으로 변환시켜줌
+>> serializer는 우리가 Django에서 사용하는 파이썬 객체나 queryset 같은 복잡한 객체들을 REST API에서 사용할 json과 같은 형태로 변환해주는 어댑터 역할을 한다.  
+
+Serializer는 DJango Rest Framework에서 나온 새로운 요소입니다. 사전적인 의미는 직렬화 하는 무언가 정도로 볼 수 있습니다.
+
+기본적으로 웹에서 통신을 할 때, 즉 데이터를 주고 받을 때는 어느 정도 정해진 포맷이 있습니다. 대표적인 타입이 JSON이나 XML인데, 대부분의 REST API에서는 JSON으로 주고 받기 때문에 JSON만 잘 알고 있으면 된다.
+
+정확한 의미의 직렬화는 Django 프로젝트에서 내가 만든 모델로부터 뽑은 queryset, 즉 모델 인스턴스를 JSON 타입으로 바꾸는 것입니다.
+
+> **Deserialize**
+> **받은 데이터(크롤링시 parse사용>python datatype)를 validating 한 후에 parsed data를 complex type으로 다시 변환**
+> 이때는 반드시 is_valid()를 호출하여 검사하자
