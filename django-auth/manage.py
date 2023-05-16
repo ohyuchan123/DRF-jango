@@ -2,6 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+sys.path.append("<django_installation_directory>")
+
 
 
 def main():
